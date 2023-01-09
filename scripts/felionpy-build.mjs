@@ -1,7 +1,7 @@
 import { spawn } from 'child_process'
 import path from 'path'
 const maindir = path.resolve("./")
-const distpath = path.join(maindir, 'build')
+// const distpath = path.join(maindir, 'build')
 const icon = path.join(maindir, 'icons/icon.ico')
 const hooks = path.join(maindir, 'hooks')
 const mainfile = path.join(maindir, 'main.py')
