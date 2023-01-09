@@ -37,18 +37,17 @@ jobs:
     strategy:
       matrix:
         include:
-          # - os: macos-latest
-          #   TARGET: macos
-          #   CMD_BUILD: >
-          #       pyinstaller -F -w -n clipster -i resources/clipster.icns cli.py &&
-          #       cd dist/ &&
-          #       zip -r9 clipster clipster.app/
-          #   OUT_FILE_NAME: clipster.zip
-          #   ASSET_MIME: application/zip
+          - os: macos-latest
+            TARGET: macos
+            CMD_BUILD: >
+                pyinstaller --noconfirm --onedir --console --icon src/icons/icon.ico --name felionpy --debug noarchive --noupx --additional-hooks-dir src/hooks --hidden-import felionlib src/main.py
+            ZIP_IT: zip -r9 felionpy-macos.zip dist/felionpy
+            OUT_FILE_NAME: felionpy-macos.zip
+            ASSET_MIME: application/zip
           - os: windows-latest
             TARGET: windows
             CMD_BUILD: pyinstaller --noconfirm --onedir --console --icon src/icons/icon.ico --name felionpy --debug noarchive --noupx --additional-hooks-dir src/hooks --hidden-import felionlib src/main.py
-            ZIP_IT: 'powershell Compress-Archive -Path dist/felionpy -DestinationPath dist/felionpy-win64.zip'
+            ZIP_IT: powershell Compress-Archive -Path dist/felionpy -DestinationPath dist/felionpy-win64.zip
             OUT_FILE_NAME: felionpy-win64.zip
             ASSET_MIME: application/zip
 
