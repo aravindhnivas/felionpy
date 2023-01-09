@@ -1,0 +1,8 @@
+build/
+**/*.pyo
+**/__pycache__/
+**/felionpy/*
+**/*.tmp
+*.egg-info
+felion.keys.txt
+felionpy.spec
