@@ -1,7 +1,7 @@
 import { spawn } from 'child_process'
 import path from 'path'
+// import fs from 'fs-extra'
 const maindir = path.resolve("./")
-// const distpath = path.join(maindir, 'build')
 const icon = path.join(maindir, 'icons/icon.ico')
 const hooks = path.join(maindir, 'hooks')
 const mainfile = path.join(maindir, 'main.py')
@@ -14,5 +14,9 @@ console.log(args)
 const py = spawn('pyinstaller', args)
 py.stdout.on('data', (data) => console.log(data.toString('utf8')))
 py.stderr.on('data', (data) => console.log(data.toString('utf8')))
-py.on('close', () => console.log('closed'))
+py.on('close', () => {
+    console.log('closed')
+})
 py.on('error', (err) => console.log('error occured', err))
+// const builddir = path.join(maindir, 'build')
+// fs.removeSync(builddir)
