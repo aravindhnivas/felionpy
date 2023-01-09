@@ -41,7 +41,7 @@ jobs:
             TARGET: macos
             CMD_BUILD: >
                 pyinstaller --noconfirm --onedir --console --icon src/icons/icon.ico --name felionpy --debug noarchive --noupx --additional-hooks-dir src/hooks --hidden-import felionlib src/main.py
-            ZIP_IT: zip -r9 felionpy-macos.zip dist/felionpy
+            ZIP_IT: zip -r9 dist/felionpy-macos.zip dist/felionpy
             OUT_FILE_NAME: felionpy-macos.zip
             ASSET_MIME: application/zip
           - os: windows-latest
