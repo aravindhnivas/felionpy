@@ -2,10 +2,10 @@ numpy
 scipy
 uncertainties
 matplotlib
-auto-py-to-exe
+pyinstaller
 flask
 PyQt6
 flask_cors
 waitress
-flake8
-black
+# flake8
+# black

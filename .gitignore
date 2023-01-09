@@ -5,5 +5,3 @@ dist/
 **/felionpy/*
 **/*.tmp
 *.egg-info
-felion.keys.txt
-felionpy.spec
