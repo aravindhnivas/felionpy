@@ -6,7 +6,7 @@ const icon = path.join(maindir, 'icons/icon.ico')
 const hooks = path.join(maindir, 'hooks')
 const mainfile = path.join(maindir, 'main.py')
 const args =
-    `--noconfirm --onedir --console --icon ${icon} --name felionpy --debug noarchive --noupx --additional-hooks-dir ${hooks} --hidden-import felionlib --paths ${maindir} --distpath ${distpath} ${mainfile}`.split(
+    `--noconfirm --onedir --console --icon ${icon} --name felionpy --debug noarchive --noupx --additional-hooks-dir ${hooks} --hidden-import felionlib --paths ${maindir} ${mainfile}`.split(
         ' '
     )
 console.log(args)
