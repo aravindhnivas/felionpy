@@ -11,7 +11,6 @@ a = Analysis(
     datas=[],
     hiddenimports=['felionlib'],
     hookspath=['E:\\github_project\\felionpy\\src\\hooks'],
-    hooksconfig={},
     runtime_hooks=[],
     excludes=[],
     win_no_prefer_redirects=False,
