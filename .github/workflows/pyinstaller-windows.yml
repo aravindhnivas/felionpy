@@ -41,7 +41,7 @@ jobs:
             TARGET: macos
             CMD_BUILD: >
                 pyinstaller --noconfirm --onedir --console --icon src/icons/icon.ico --name felionpy --debug noarchive --noupx --additional-hooks-dir src/hooks --hidden-import felionlib src/main.py
-            ZIP_IT: zip -r9 dist/felionpy-macos.zip dist/felionpy
+            ZIP_IT: cd dist && zip -r9 felionpy-macos.zip felionpy/
             OUT_FILE_NAME: felionpy-macos.zip
             ASSET_MIME: application/zip
           - os: windows-latest
@@ -89,9 +89,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       with:
         upload_url: ${{ steps.get_release_info.outputs.upload_url }}
-        # asset_path: felionpy.zip
-        # asset_name: archive.zip
-        # asset_content_type: application/zip
         asset_path: ./dist/${{ matrix.OUT_FILE_NAME}}
         asset_name: ${{ matrix.OUT_FILE_NAME}}
         asset_content_type: ${{ matrix.ASSET_MIME}}
