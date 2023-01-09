@@ -1,7 +1,7 @@
 import { spawn } from 'child_process'
 import path from 'path'
 // import fs from 'fs-extra'
-const maindir = path.resolve("./")
+const maindir = path.resolve("./src")
 const icon = path.join(maindir, 'icons/icon.ico')
 const hooks = path.join(maindir, 'hooks')
 const mainfile = path.join(maindir, 'main.py')
