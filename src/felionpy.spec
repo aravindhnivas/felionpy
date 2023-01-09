@@ -5,12 +5,12 @@ block_cipher = None
 
 
 a = Analysis(
-    ['.\\src\\main.py'],
-    pathex=['.\\src'],
+    ['main.py'],
+    pathex=['src'],
     binaries=[],
     datas=[],
     hiddenimports=['felionlib'],
-    hookspath=['.\\src\\hooks'],
+    hookspath=['hooks'],
     runtime_hooks=[],
     excludes=[],
     win_no_prefer_redirects=False,
@@ -36,7 +36,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['.\\src\\icons\\icon.ico'],
+    icon=['icons/icon.ico'],
 )
 coll = COLLECT(
     exe,
