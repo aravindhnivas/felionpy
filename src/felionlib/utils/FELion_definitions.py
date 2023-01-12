@@ -2,6 +2,7 @@ import shutil
 import io
 import os
 from os.path import join
+import tempfile
 import json
 from pathlib import Path as pt
 import cProfile
@@ -89,7 +90,7 @@ def read_dat_file(filename, norm_method):
     return xs, ys
 
 
-save_location = pt(os.getenv("TEMP")) / "FELion_GUI3"
+save_location = pt(tempfile.gettempdir()) / "FELion_GUI3"
 if not save_location.exists():
     os.mkdir(save_location)
 

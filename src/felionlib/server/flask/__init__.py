@@ -6,7 +6,7 @@ from importlib import import_module, reload
 from flask import Flask, request, jsonify, abort
 from flask_cors import CORS
 from pathlib import Path as pt
-import os
+import tempfile
 
 # from multiprocessing import Process
 app = Flask(__name__)
@@ -27,7 +27,7 @@ def pyError(error):
     return jsonify(error=str(error)), 404
 
 
-save_location = pt(os.getenv("TEMP")) / "FELion_GUI3"
+save_location = pt(tempfile.gettempdir()) / "FELion_GUI3"
 
 
 @app.route("/", methods=["POST"])
@@ -55,21 +55,21 @@ def compute():
 
         timeConsumed = perf_counter() - startTime
         logger(f"function execution done in {timeConsumed:.2f} s")
-        
+
         if isinstance(output, dict):
             logger(f"Returning received to client")
             return jsonify(output)
 
         if not filename.exists():
             raise Exception("Computed file is neither returned from main function or saved to temperary location")
-                    
+
         with open(filename, "r") as f:
             data = json.load(f)
         return jsonify(data)
 
     except Exception:
-        
+
         error = traceback.format_exc(5)
         logger("catching the error occured in python", error)
         abort(404, description=error)
-        
+
