@@ -27,7 +27,7 @@ def pyError(error):
     return jsonify(error=str(error)), 404
 
 
-save_location = pt(tempfile.gettempdir()) / "FELion_GUI3"
+save_location = pt(tempfile.gettempdir()) / "com.felion.app"
 
 
 @app.route("/", methods=["POST"])

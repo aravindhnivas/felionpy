@@ -90,7 +90,7 @@ def read_dat_file(filename, norm_method):
     return xs, ys
 
 
-save_location = pt(tempfile.gettempdir()) / "FELion_GUI3"
+save_location = pt(tempfile.gettempdir()) / "com.felion.app"
 if not save_location.exists():
     os.mkdir(save_location)
 
