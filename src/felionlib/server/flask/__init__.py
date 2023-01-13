@@ -8,7 +8,6 @@ from flask_cors import CORS
 from pathlib import Path as pt
 import tempfile
 
-# from multiprocessing import Process
 app = Flask(__name__)
 CORS(app)
 
