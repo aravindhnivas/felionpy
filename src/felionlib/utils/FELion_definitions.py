@@ -63,19 +63,22 @@ def var_find(filename, var=None, get_defaults=True):
 
     with open(filename, "r") as mfile:
         mfile = np.array(mfile.readlines())
+    values = {}
 
     for line in mfile:
-        if not len(line.strip()) == 0 and line.split()[0] == "#":
+        if len(line.strip()) > 0 and line.split()[0] == "#":
             for j in var:
                 if var[j] in line.split():
-                    var[j] = float(line.split()[-3])
+                    values[j] = float(line.split()[-3])
 
     if get_defaults:
-        res, b0, trap = round(var["res"], 2), int(var["b0"] / 1000), int(var["trap"] / 1000)
+        res = round(values["res"], 2) if "res" in values else "N/A"
+        b0 = int(values["b0"] / 1000) if "b0" in values else "N/A"
+        trap = int(values["trap"] / 1000) if "trap" in values else "N/A"
         return res, b0, trap
 
     else:
-        return var
+        return values
 
 
 def read_dat_file(filename, norm_method):

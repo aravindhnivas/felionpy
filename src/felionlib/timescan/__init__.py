@@ -1,5 +1,5 @@
 import json
-from typing import Any, Union
+from typing import Union
 import warnings
 from pathlib import Path as pt
 import numpy as np
@@ -8,7 +8,8 @@ from felionlib.utils.FELion_definitions import sendData
 warnings.simplefilter(action="ignore", category=FutureWarning)
 
 from felionlib.utils.felionQt import felionQtWindow
-from .utils import var_find, get_iterations, get_skip_line
+from .utils import get_iterations, get_skip_line
+from felionlib.utils.FELion_definitions import var_find
 
 
 class timescanplot:
@@ -61,7 +62,7 @@ class timescanplot:
         j, mass_count = 0, 0
 
         self.mean, self.error, self.mass = [], [], []
-        self.t_res, self.t_b0 = var_find(self.scanfile)
+        self.t_res, self.t_b0, _ = var_find(self.scanfile)
 
         for iteration in iterations:
 

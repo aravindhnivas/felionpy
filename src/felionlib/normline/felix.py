@@ -5,27 +5,10 @@ import numpy as np
 from .utils.FELion_baseline_old import felix_read_file, BaselineCalibrator
 from .utils.FELion_power import PowerCalibrator
 from .utils.FELion_sa import SpectrumAnalyserCalibrator
-from felionlib.utils.FELion_definitions import sendData
+from felionlib.utils.FELion_definitions import sendData, var_find
 from felionlib.utils.FELion_constants import colors
 
-# from multiprocessing import Pool
 ######################################################################################
-
-
-def var_find(openfile):
-
-    var = {"res": "m03_ao13_reso", "b0": "m03_ao09_width", "trap": "m04_ao04_sa_delay"}
-
-    with open(openfile, "r") as mfile:
-        mfile = np.array(mfile.readlines())
-    for line in mfile:
-        if not len(line.strip()) == 0 and line.split()[0] == "#":
-            for j in var:
-                if var[j] in line.split():
-                    var[j] = float(line.split()[-3])
-
-    res, b0, trap = round(var["res"], 2), int(var["b0"] / 1000), int(var["trap"] / 1000)
-    return res, b0, trap
 
 
 def makeDataToSend(x, y, name, update={}):
