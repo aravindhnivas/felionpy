@@ -7,7 +7,7 @@ from .utils.FELion_power import PowerCalibrator
 from .utils.FELion_sa import SpectrumAnalyserCalibrator
 from felionlib.utils.FELion_definitions import sendData, var_find
 from felionlib.utils.FELion_constants import colors
-
+from scipy.constants import Planck, speed_of_light
 ######################################################################################
 
 
@@ -219,6 +219,18 @@ class normplot:
 
     def inten_per_photon(self, wn, inten):
         return (np.array(wn) * np.array(inten)) / 1e3
+    
+    def wn_to_J(self, wavenumber):
+        speed_of_light_in_cm = speed_of_light * 100
+        return Planck * speed_of_light_in_cm * wavenumber
+
+    # def inten_per_photon(self, wn, inten):
+    #     wn = np.array(wn, dtype=float)
+    #     inten = np.array(inten, dtype=float)
+    #     print(wn, inten, flush=True)
+    #     val = self.wn_to_J(wn) * inten
+    #     val = val / np.sum(val)
+    #     return val * 100
 
     def norm_line_felix(self, PD=True):
 
