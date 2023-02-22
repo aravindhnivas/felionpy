@@ -76,11 +76,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r src/requirements.txt
     
-    - name: install dependencies (ubuntu only)
-      if: matrix.TARGET == 'ubuntu'
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y zip
+    # - name: install dependencies (ubuntu only)
+    #   if: matrix.TARGET == 'ubuntu'
+    #   run: |
+    #     sudo apt-get update
+    #     sudo apt-get install -y zip
 
     - name: Build with pyinstaller for ${{matrix.TARGET}}
       run: ${{matrix.CMD_BUILD}}
