@@ -803,7 +803,7 @@ class felionQtWindow(QtWidgets.QMainWindow):
 
         xbound: tuple[float, float] = self.ax.get_xbound()
         ybound: tuple[float, float] = self.ax.get_ybound()
-        print(f"{xbound=}\n{ybound=}", flush=True)
+        # print(f"{xbound=}\n{ybound=}", flush=True)
         set_min_max_val(self.xbound_lower_widget, xbound[0])
         set_min_max_val(self.xbound_upper_widget, xbound[1])
         set_min_max_val(self.ybound_lower_widget, ybound[0])
@@ -1072,7 +1072,7 @@ class felionQtWindow(QtWidgets.QMainWindow):
 
             # self.update_tick_params(ax=ax)
             ax.tick_params(which="both", direction=self.ticks_direction, labelsize=labelsize - 1)
-            
+
             if self.minorticks:
                 ax.minorticks_on()
 
@@ -1287,7 +1287,7 @@ class felionQtWindow(QtWidgets.QMainWindow):
         self.legend_edit_window.edit_box_widget.returnPressed.connect(self.save_editted_legend)
         if on_pick_callback is not None:
             self.canvas.mpl_connect("pick_event", lambda e: self.on_pick(e, on_pick_callback))
-        print("legend editor made", flush=True)
+        # print("legend editor made", flush=True)
 
     def makeLegendToggler(self, line_handler: dict[str, Union[Artist, Iterable]] = None, edit_legend=True) -> None:
         self.line_handler = line_handler
