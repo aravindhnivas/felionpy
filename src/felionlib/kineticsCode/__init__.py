@@ -75,7 +75,7 @@ def main(args):
     selectedFile = args["selectedFile"]
 
     try:
-        numberDensity = ufloat_fromstr(args["numberDensity"])
+        numberDensity = ufloat_fromstr(args["numberDensity"]).nominal_value
         print(f"{numberDensity=}", flush=True)
     except Exception as error:
         print(f"Could not read number density", error, flush=True)

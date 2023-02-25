@@ -15,10 +15,11 @@ from felionlib.kineticsCode import (
 )
 
 try:
-    from felionlib.kineticsCode import numberDensity as He
+    from felionlib.kineticsCode import numberDensity
+    print(f"{numberDensity=}", flush=True)
 except ImportError:
     print("Could not import numberDensity")
-    He = None
+    numberDensity = None
 
 from felionlib.kineticsCode.utils.widgets.checkboxes import checkboxes
 from .configfile import ratek3, ratekCID, k_err as k_err_config
@@ -63,6 +64,7 @@ codeContents = readCodeFromFile(kinetics_equation_file)
 
 codeOutput = codeToRun(codeContents)
 compute_attachment_process = codeOutput["compute_attachment_process"]
+# print(f"{compute_attachment_process=}", flush=True)
 
 
 def intialize_fit_plot() -> None:
