@@ -11,11 +11,10 @@ from pstats import SortKey
 import inspect
 import contextlib
 import sys
-
 import numpy as np
 from scipy.optimize import curve_fit
 from scipy.interpolate import interp1d
-from uncertainties import unumpy as unp
+from uncertainties import unumpy as unp, ufloat
 
 
 def gaussian(x, amp, sig, cen):
@@ -267,7 +266,24 @@ def stdoutIO(stdout=None):
     if stdout is None:
         stdout = io.StringIO()
     sys.stdout = stdout
-
     yield stdout
-
     sys.stdout = old
+
+
+def get_weighted_mean_from_uarray(uarr, ufloat_fmt=False, verbose=False):
+
+    values = unp.nominal_values(uarr)
+    sigma = unp.std_devs(uarr)
+
+    varience = sigma**2
+    weights = 1 / varience
+    mean_weighted = np.sum(values * weights) / np.sum(weights)
+    varience_weighted = 1 / np.sum(weights)
+    sigma_weighted = np.sqrt(varience_weighted)
+
+    if verbose:
+        print(f"{mean_weighted=}", flush=True)
+        print(f"{sigma_weighted=}", flush=True)
+    if ufloat_fmt:
+        return ufloat(mean_weighted, sigma_weighted)
+    return [mean_weighted, sigma_weighted]
