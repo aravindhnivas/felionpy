@@ -1,3 +1,1 @@
-hiddenimports = [
-    "felionlib.kineticsCode.derive_rate_constants"
-]
+hiddenimports = ["felionlib.kineticsCode.fit_rates"]
