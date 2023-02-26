@@ -29,6 +29,7 @@ def main(args):
             "std": unp.std_devs(rate_constant).tolist(),
             "mean": f"{ufloat(unp.nominal_values(rate_constant).mean(), unp.nominal_values(rate_constant).std())}",
             "weighted_mean": f"{get_weighted_mean_from_uarray(rate_constant, ufloat_fmt=True)}",
+            "ylabel_units": f"s<sup>-1</sup> cm<sup>{3 * polyOrder}</sup>",
         },
     }
 
