@@ -35,6 +35,12 @@ def main(args):
         return dataToSend
 
     addIntercept = bool(args["addIntercept"])
+    effective_rate_polyOrder = float(args["effective_rate_polyOrder"])
+
+    ke = unp_y / unp_x**effective_rate_polyOrder
+    ke_val = unp.nominal_values(ke)
+    ke_std = unp.std_devs(ke)
+
     rate_constant_guess = float(args["$rate_constant_guess"])
 
     def fit_func(x, m, c):
@@ -48,11 +54,10 @@ def main(args):
     else:
         p0 = [rate_constant_guess]
 
-    popt, pcov = curve_fit(fit_func, x, y, sigma=y_err, absolute_sigma=True, p0=p0)
+    popt, pcov = curve_fit(fit_func, x, ke_val, sigma=ke_std, absolute_sigma=True, p0=p0)
     perr = np.sqrt(np.diag(pcov))
 
     upop = unp.uarray(popt, perr)
-
     if addIntercept:
         slope = upop[0]
         intercept = upop[1]
@@ -60,19 +65,26 @@ def main(args):
         slope = upop
         intercept = 0
 
-    x_val_std = unp.uarray(x, y_err)
-    fitY = fit_func(x_val_std, *upop)
-    print(f"{upop=}", flush=True)
-    print(f"{fitY=}", flush=True)
+    # x_val_std = unp.uarray(x, x_err)
+    fitX = np.linspace(0, x.max() * 1.5, 100)
+    fitY = fit_func(fitX, *popt)
+    # print(f"{upop=}", flush=True)
+    # print(f"{fitY=}", flush=True)
 
     dataToSend = dataToSend | {
-        "fitY": {
-            "val": unp.nominal_values(fitY).tolist(),
-            "std": unp.std_devs(fitY).tolist(),
-            "name": f"fitted slope={upop[0]}; intercept={upop[1]}",
+        # "fitY": {
+        #     "val": unp.nominal_values(fitY).tolist(),
+        #     "std": unp.std_devs(fitY).tolist(),
+        #     "name": f"fitted slope={upop[0]}; intercept={upop[1]}",
+        # },
+        "ke": {
+            "val": unp.nominal_values(ke).tolist(),
+            "std": unp.std_devs(ke).tolist(),
         },
-        "fitted_slope": f"{slope}",
-        "fitted_intercept": f"{intercept}",
+        "fitX": fitX.tolist(),
+        "fitY": fitY.tolist(),
+        "fitted_slope": f"{slope:.2e}",
+        "fitted_intercept": f"{intercept:.2e}",
     }
 
     return dataToSend
