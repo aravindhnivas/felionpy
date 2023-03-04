@@ -20,15 +20,13 @@ def main(args):
     y_err = np.array(fitted_values["std"], dtype=float)
     unp_y = unp.uarray(y, y_err)
 
-    # print(f"{unp_x=}", flush=True)
     rate_constant = unp_y / unp_x**polyOrder
-    print(f"{rate_constant.mean()=}", flush=True)
+    mean_weighted = get_weighted_mean_from_uarray(rate_constant, ufloat_fmt=True, verbose=True)
     dataToSend = {
         "rate_constant": {
             "val": unp.nominal_values(rate_constant).tolist(),
             "std": unp.std_devs(rate_constant).tolist(),
-            # "mean": f"{ufloat(unp.nominal_values(rate_constant).mean(), unp.nominal_values(rate_constant).std())}",
-            "weighted_mean": f"{get_weighted_mean_from_uarray(rate_constant, ufloat_fmt=True, verbose=True)}",
+            "weighted_mean": f"{mean_weighted:.2e}",
             "ylabel_units": f"s<sup>-1</sup> cm<sup>{3 * polyOrder}</sup>",
         },
     }
@@ -38,8 +36,6 @@ def main(args):
 
     addIntercept = bool(args["addIntercept"])
     rate_constant_guess = float(args["$rate_constant_guess"])
-
-    # print(f"{fitted_values['val']=}", flush=True)
 
     def fit_func(x, m, c):
         if addIntercept:
@@ -66,7 +62,6 @@ def main(args):
 
     x_val_std = unp.uarray(x, y_err)
     fitY = fit_func(x_val_std, *upop)
-
     print(f"{upop=}", flush=True)
     print(f"{fitY=}", flush=True)
 

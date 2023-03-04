@@ -291,10 +291,10 @@ def get_weighted_mean_from_uarray(uarr, ufloat_fmt=False, verbose=False):
     std_dev = max(s_int, s_ext)
 
     if verbose:
-        print(f"{mean_weighted=:.1e}", flush=True)
+        print(f"{mean_weighted=:.2e}", flush=True)
         print(f"{s_int=:.1e}", flush=True)
         print(f"{s_ext=:.1e}", flush=True)
-        print(f"{ufloat(mean_weighted, std_dev)}", flush=True)
+        print(f"{ufloat(mean_weighted, std_dev):.2e}", flush=True)
     
     if ufloat_fmt:
         return ufloat(mean_weighted, std_dev)
