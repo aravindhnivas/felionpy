@@ -22,13 +22,13 @@ def main(args):
 
     # print(f"{unp_x=}", flush=True)
     rate_constant = unp_y / unp_x**polyOrder
-
+    print(f"{rate_constant.mean()=}", flush=True)
     dataToSend = {
         "rate_constant": {
             "val": unp.nominal_values(rate_constant).tolist(),
             "std": unp.std_devs(rate_constant).tolist(),
-            "mean": f"{ufloat(unp.nominal_values(rate_constant).mean(), unp.nominal_values(rate_constant).std())}",
-            "weighted_mean": f"{get_weighted_mean_from_uarray(rate_constant, ufloat_fmt=True)}",
+            # "mean": f"{ufloat(unp.nominal_values(rate_constant).mean(), unp.nominal_values(rate_constant).std())}",
+            "weighted_mean": f"{get_weighted_mean_from_uarray(rate_constant, ufloat_fmt=True, verbose=True)}",
             "ylabel_units": f"s<sup>-1</sup> cm<sup>{3 * polyOrder}</sup>",
         },
     }

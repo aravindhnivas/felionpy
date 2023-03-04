@@ -277,13 +277,27 @@ def get_weighted_mean_from_uarray(uarr, ufloat_fmt=False, verbose=False):
 
     varience = sigma**2
     weights = 1 / varience
-    mean_weighted = np.sum(values * weights) / np.sum(weights)
-    varience_weighted = 1 / np.sum(weights)
-    sigma_weighted = np.sqrt(varience_weighted)
+    sum_weights = np.sum(weights)
+    
+    mean_weighted = np.sum(values * weights) / sum_weights
+    
+    s_int = 1 / np.sqrt(sum_weights)
+    N = len(values)
+    
+    varience_ext = np.sum(weights*(values-mean_weighted)**2) / sum_weights
+
+    s_ext = np.sqrt(varience_ext/(N-1))
+    
+    std_dev = max(s_int, s_ext)
 
     if verbose:
-        print(f"{mean_weighted=}", flush=True)
-        print(f"{sigma_weighted=}", flush=True)
+        print(f"{mean_weighted=:.1e}", flush=True)
+        print(f"{s_int=:.1e}", flush=True)
+        print(f"{s_ext=:.1e}", flush=True)
+        print(f"{ufloat(mean_weighted, std_dev)}", flush=True)
+    
     if ufloat_fmt:
-        return ufloat(mean_weighted, sigma_weighted)
-    return [mean_weighted, sigma_weighted]
+        return ufloat(mean_weighted, std_dev)
+ 
+    return [mean_weighted, std_dev]
+ 
