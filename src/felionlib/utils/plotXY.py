@@ -45,8 +45,13 @@ def main(args):
 
     files = [pt(i) for i in args["files"]]
     figArgs = args["figArgs"]
-    legend_prefix = args["legend_prefix"]
-    legend_suffix = args["legend_suffix"]
+    if "legend_prefix" in args:
+        legend_prefix = args["legend_prefix"]
+    if "legend_suffix" in args:
+        legend_suffix = args["legend_suffix"]
+        
+    # legend_prefix = args["legend_prefix"] or ""
+    # legend_suffix = args["legend_suffix"] or ""
 
     widget = felionQtWindow(**figArgs)
     legend_handler = {}

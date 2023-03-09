@@ -568,6 +568,7 @@ class ROSAA:
                 self.includeAttachmentRate = False
 
                 logger(f"\nPower: {self.power}")
+
                 self.power = self.power * 1e5
                 logger(f"Increased power: {self.power}\n")
 
