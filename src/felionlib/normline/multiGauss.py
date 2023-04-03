@@ -78,7 +78,7 @@ def main(gauss_args):
 
     felix = True
     fullfiles = [pt(i) for i in gauss_args["fullfiles"]]
-
+    wn, inten = None, None
     for i, f in enumerate(fullfiles):
 
         if f.stem == gauss_args["output_name"]:
@@ -112,6 +112,10 @@ def main(gauss_args):
             print(f"Read {filename.name} from \n{filename.parent}\nwn range: {wn.min():.2f} - {wn.max():.2f}\n")
 
             break
+    
+    if wn is None or inten is None:
+        raise ValueError(f"{gauss_args['output_name']} not found in {gauss_args['fullfiles']}")
+    
     index = False
     if len(gauss_args["index"]) > 1:
         index = start_wn, end_wn = gauss_args["index"]
