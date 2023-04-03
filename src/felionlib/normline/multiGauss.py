@@ -84,11 +84,14 @@ def main(gauss_args):
         if f.stem == gauss_args["output_name"]:
 
             filename = fullfiles[i]
+            
             if f.stem == "averaged":
                 line_color = "black"
+                extname = ""
             else:
                 line_color = f"rgb{colors[2*i]}"
-            extname = filename.suffix.split(".")[1]
+                extname = filename.suffix.split(".")[1]
+                
             if "felix" in extname or filename.stem == "averaged":
                 print("Reading felix file\n")
                 location = pt(gauss_args["location"])
