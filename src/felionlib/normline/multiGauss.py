@@ -84,14 +84,14 @@ def main(gauss_args):
         if f.stem == gauss_args["output_name"]:
 
             # filename = fullfiles[i]
-            
+
             if f.stem == "averaged":
                 line_color = "black"
                 # extname = ""
             else:
                 line_color = f"rgb{colors[2*i]}"
                 # extname = filename.suffix.split(".")[1]
-                
+
             if f.stem == "averaged" or f.name.endswith("felix"):
                 print("Reading felix file\n")
                 location = pt(gauss_args["location"])
@@ -112,10 +112,10 @@ def main(gauss_args):
             print(f"Read {f.name} from \n{f.parent}\nwn range: {wn.min():.2f} - {wn.max():.2f}\n")
 
             break
-    
+
     if wn is None or inten is None:
         raise ValueError(f"{gauss_args['output_name']} not found")
-    
+
     index = False
     if len(gauss_args["index"]) > 1:
         index = start_wn, end_wn = gauss_args["index"]
@@ -140,21 +140,22 @@ def main(gauss_args):
 
     overwrite = gauss_args["overwrite_expfit"]
     fitall = gauss_args["fitall"]
-    
+
     if felix:
         normMethods = ["Relative", "Log", "IntensityPerPhoton"] if fitall else [norm_method]
     else:
         normMethods = ["addedFile"]
 
     for method in normMethods:
-        
+
         if method == "addedFile":
             dataTosend[norm_method] = {}
+            method = norm_method
         else:
             dataTosend[method] = {}
-            
-        
+
         print(f"Fitting for method: {method}\n")
+
         if felix:
             _wn, _inten = filterWn(datfile, method, index)
         else:
