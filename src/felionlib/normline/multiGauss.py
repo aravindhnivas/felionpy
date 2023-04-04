@@ -92,7 +92,7 @@ def main(gauss_args):
                 line_color = f"rgb{colors[2*i]}"
                 # extname = filename.suffix.split(".")[1]
                 
-            if f.stem == "averaged" or f.stem.endswith("felix"):
+            if f.stem == "averaged" or f.name.endswith("felix"):
                 print("Reading felix file\n")
                 location = pt(gauss_args["location"])
 
