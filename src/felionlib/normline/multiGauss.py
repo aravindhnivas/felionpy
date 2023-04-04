@@ -153,7 +153,6 @@ def main(gauss_args):
             method = norm_method
         else:
             dataTosend[method] = {}
-
         print(f"Fitting for method: {method}\n")
 
         if felix:
