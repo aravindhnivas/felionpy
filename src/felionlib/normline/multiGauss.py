@@ -83,24 +83,24 @@ def main(gauss_args):
 
         if f.stem == gauss_args["output_name"]:
 
-            filename = fullfiles[i]
+            # filename = fullfiles[i]
             
             if f.stem == "averaged":
                 line_color = "black"
-                extname = ""
+                # extname = ""
             else:
                 line_color = f"rgb{colors[2*i]}"
-                extname = filename.suffix.split(".")[1]
+                # extname = filename.suffix.split(".")[1]
                 
-            if "felix" in extname or filename.stem == "averaged":
+            if f.stem == "averaged" or f.stem.endswith("felix"):
                 print("Reading felix file\n")
                 location = pt(gauss_args["location"])
 
                 if location.name == "DATA":
                     location = location.parent
 
-                filename = location / f"EXPORT/{filename.stem}.dat"
-                wn, inten = read_dat_file(filename, norm_method)
+                f = location / f"EXPORT/{f.stem}.dat"
+                wn, inten = read_dat_file(f, norm_method)
             else:
 
                 felix = False
@@ -109,12 +109,12 @@ def main(gauss_args):
                 scale = float(gauss_args["addedFileScale"])
                 wn, inten = np.genfromtxt(f).T[col]
                 inten *= scale
-            print(f"Read {filename.name} from \n{filename.parent}\nwn range: {wn.min():.2f} - {wn.max():.2f}\n")
+            print(f"Read {f.name} from \n{f.parent}\nwn range: {wn.min():.2f} - {wn.max():.2f}\n")
 
             break
     
     if wn is None or inten is None:
-        raise ValueError(f"{gauss_args['output_name']} not found in {gauss_args['fullfiles']}")
+        raise ValueError(f"{gauss_args['output_name']} not found")
     
     index = False
     if len(gauss_args["index"]) > 1:
