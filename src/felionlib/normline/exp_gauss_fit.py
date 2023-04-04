@@ -29,9 +29,9 @@ def main(args, getvalue=False):
     
             filename = fullfiles[i]
             line_color = "black" if f.stem == "averaged" else f"rgb{colors[2*i]}"
-            extname = filename.suffix.split(".")[1]
+            # extname = filename.suffix.split(".")[1]
 
-            if "felix" in extname or filename.stem == "averaged":
+            if f.stem == "averaged" or f.name.endswith("felix"):
             
                 print("Reading felix file\n", flush=True)
                 location = pt(args["location"])
