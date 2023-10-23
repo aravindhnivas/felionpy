@@ -5,3 +5,4 @@ dist/
 **/felionpy/*
 **/*.tmp
 *.egg-info
+.DS_Store
